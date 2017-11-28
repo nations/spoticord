@@ -21,6 +21,7 @@ async function checkSpotify() {
       return;
     }
 
+    if(!res.track.track_resource) return;
     if(res.track.track_resource.uri == currentSong.uri) return;
 
     let start = parseInt(new Date().getTime().toString().substr(0, 10)),
