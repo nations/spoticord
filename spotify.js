@@ -150,7 +150,7 @@ function launchSpotifyWebhelperIfNeeded(cb) {
 
 }
 
-async function SpotifyWebHelper(opts) {
+function SpotifyWebHelper(opts) {
     if (!(this instanceof SpotifyWebHelper)) {
         return new SpotifyWebHelper(opts);
     }
