@@ -1,0 +1,5 @@
+{
+  "appClientID": "",
+  "imageKeys": { "large": "spotifyl" },
+  "rpcTransportType": "ipc"
+}
