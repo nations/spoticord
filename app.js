@@ -24,10 +24,10 @@ async function checkSpotify() {
     if(res.track.track_resource.uri == currentSong.uri) return;
 
     let start = parseInt(new Date().getTime().toString().substr(0, 10)),
-        end = start + res.track.length;
+        end = start + (res.track.length - res.playing_position);
     var song = {uri: res.track.track_resource.uri, name: res.track.track_resource.name, artist: res.track.artist_resource.name, start, end};
     currentSong = song;
-    
+
     songEmitter.emit('newSong', song);
   });
 }
@@ -35,7 +35,7 @@ async function checkSpotify() {
 songEmitter.on('newSong', song => {
   rpc.setActivity({
     details: `🎵 Listening to: ${song.name}`,
-                                state: `💿 by ${song.artist}`,
+    state: `💿 by ${song.artist}`,
 	  startTimestamp: song.start,
 		endTimestamp: song.end,
 		largeImageKey: largeImageKey,
