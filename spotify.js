@@ -6,17 +6,16 @@
 // This is a port foor node.js of this great article's code:
 // http://cgbystrom.com/articles/deconstructing-spotifys-builtin-http-server/
 
-var request = require('request')
-var qs = require('querystring')
-var util = require('util');
-var path = require('path');
-var child_process = require('child_process');
+var request = require('request'),
+    qs = require('querystring'),
+    util = require('util'),
+    path = require('path'),
+    child_process = require('child_process');
 
 // global variables, used when running on windows
 var wintools;
 var spotifyWebHelperWinProcRegex;
 
-// Default port that Spotify Web Helper binds to.
 var DEFAULT_PORT = 4381;
 var DEFAULT_RETURN_ON = ['login', 'logout', 'play', 'pause', 'error', 'ap']
 var DEFAULT_RETURN_AFTER = 1
@@ -24,7 +23,7 @@ var ORIGIN_HEADER = { 'Origin': 'https://open.spotify.com' }
 var FAKE_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36';
 
 
-function getJson(url, params, headers, cb) {
+async function getJson(url, params, headers, cb) {
     if (params instanceof Function) {
         cb = params;
         params = null;
@@ -78,7 +77,7 @@ function generateRandomLocalHostName() {
     return generateRandomString(10) + '.spotilocal.com'
 }
 
-function getOauthToken(cb) {
+async function getOauthToken(cb) {
     return getJson('http://open.spotify.com/token', function (err, res) {
         if (err) {
             return cb(err);
@@ -88,7 +87,7 @@ function getOauthToken(cb) {
     });
 }
 
-function isSpotifyWebHelperRunning(cb) {
+async function isSpotifyWebHelperRunning(cb) {
   cb = cb || function () { };
   // not doing anything for non windows, for now
   if (process.platform != 'win32')  {
@@ -151,7 +150,7 @@ function launchSpotifyWebhelperIfNeeded(cb) {
 
 }
 
-function SpotifyWebHelper(opts) {
+async function SpotifyWebHelper(opts) {
     if (!(this instanceof SpotifyWebHelper)) {
         return new SpotifyWebHelper(opts);
     }
