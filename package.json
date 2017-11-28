@@ -19,6 +19,7 @@
   "dependencies": {
     "discord-rpc": "^3.0.0-beta.4",
     "fancy-log": "^1.3.0",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "wintools": "^0.1.0"
   }
 }
