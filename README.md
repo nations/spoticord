@@ -17,5 +17,5 @@
 
 ## Useful links
 
-[RPC API Documentation](https://discordapp.com/developers/docs/topics/rpc)
-[Rich Presence Documentation](https://discordapp.com/developers/docs/rich-presence/how-to)
+* [RPC API Documentation](https://discordapp.com/developers/docs/topics/rpc)
+* [Rich Presence Documentation](https://discordapp.com/developers/docs/rich-presence/how-to)
