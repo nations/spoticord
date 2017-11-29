@@ -36,3 +36,7 @@
   - Open ps.js
   - On line 11, replace the whole line with:
   `exec('wmic process list /format:csv', {maxBuffer: 2000*1024}, function (err, stdout, stderr) {`
+  
+### How to run in the background
+  - Install pm2 `npm i pm2 -g`
+  - Start the app `pm2 start app.js` 
