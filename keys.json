@@ -1,5 +1,5 @@
 {
   "appClientID": "",
-  "imageKeys": { "large": "spotifyl" },
+  "imageKeys": { "large": "spotifyl", "small": "play_button_clean"},
   "rpcTransportType": "ipc"
 }

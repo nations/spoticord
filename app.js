@@ -9,7 +9,8 @@ const keys = require('./keys.json');
 const rpc = new DiscordRPC.Client({ transport: keys.rpcTransportType }),
       s = new spotifyWeb.SpotifyWebHelper(),
       appClient = keys.appClientID || "385061381344591872",
-      largeImageKey = keys.imageKeys.large;
+      largeImageKey = keys.imageKeys.large,
+      smallImageKey = keys.imageKeys.small;
 
 var songEmitter = new events.EventEmitter(),
     currentSong = {};
@@ -40,6 +41,7 @@ songEmitter.on('newSong', song => {
 	  startTimestamp: song.start,
 		endTimestamp: song.end,
 		largeImageKey: largeImageKey,
+    smallImageKey: smallImageKey,
 		instance: false,
   });
 
