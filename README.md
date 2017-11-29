@@ -17,7 +17,7 @@
 
 ## Updating
 
-  -To update SpotiCord, run `git fetch` in your terminal.
+  - To update SpotiCord, run `git fetch` in your terminal.
 
 
 ## Useful links
