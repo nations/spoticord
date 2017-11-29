@@ -4,13 +4,14 @@
 
 ## Dependencies
   - NodeJS >=8
+  - npm (>=5) or Yarn (>=1.2)
   - Discord Canary (preferred)
   - Spotify >= 1.0
 
 ## Setup
 
   - Clone the repo `git clone git@github.com:nations/spoticord.git`
-  - Install the modules `npm i`
+  - Install the modules `npm i` or `yarn`
   - Open Discord & Spotify
   - Start the RPC app `node app.js`
 
