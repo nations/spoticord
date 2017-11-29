@@ -7,9 +7,9 @@ const DiscordRPC = require('discord-rpc'),
 const keys = require('./keys.json');
 
 const rpc = new DiscordRPC.Client({ transport: keys.rpcTransportType }),
-       s = new spotifyWeb.SpotifyWebHelper(),
-       appClient = keys.appClientID || "385061381344591872",
-       largeImageKey = keys.imageKeys.large;
+      s = new spotifyWeb.SpotifyWebHelper(),
+      appClient = keys.appClientID || "385061381344591872",
+      largeImageKey = keys.imageKeys.large;
 
 var songEmitter = new events.EventEmitter(),
     currentSong = {};

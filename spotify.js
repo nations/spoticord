@@ -13,14 +13,13 @@ var request = require('request'),
     child_process = require('child_process');
 
 // global variables, used when running on windows
-var wintools;
-var spotifyWebHelperWinProcRegex;
+var wintools, spotifyWebHelperWinProcRegex;
 
-var DEFAULT_PORT = 4381;
-var DEFAULT_RETURN_ON = ['login', 'logout', 'play', 'pause', 'error', 'ap']
-var DEFAULT_RETURN_AFTER = 1
-var ORIGIN_HEADER = { 'Origin': 'https://open.spotify.com' }
-var FAKE_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36';
+const DEFAULT_PORT = 4381,
+      DEFAULT_RETURN_ON = ['login', 'logout', 'play', 'pause', 'error', 'ap'],
+      DEFAULT_RETURN_AFTER = 1,
+      ORIGIN_HEADER = { 'Origin': 'https://open.spotify.com' },
+      FAKE_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36';
 
 
 async function getJson(url, params, headers, cb) {
@@ -61,15 +60,8 @@ async function getJson(url, params, headers, cb) {
     });
 }
 
-var ASCII_LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
-// http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript
 function generateRandomString(length) {
-    var text = "";
-
-    for( var i=0; i < 10; i++ )
-        text += ASCII_LOWER_CASE.charAt(Math.floor(Math.random() * ASCII_LOWER_CASE.length));
-
-    return text;
+    return Math.random().toString(36).substr(length);
 }
 
 function generateRandomLocalHostName() {
@@ -120,7 +112,7 @@ function getWindowsSpotifyWebHelperPath() {
   return path.join(process.env.USERPROFILE, 'AppData\\Roaming\\Spotify\\Data\\SpotifyWebHelper.exe');
 }
 
-function launchSpotifyWebhelperIfNeeded(cb) {
+function launchSpotifyWebhelper(cb) {
   cb = cb || function () { };
   // not doing anything for non windows, for now
   if (process.platform != 'win32') {
@@ -189,7 +181,7 @@ function SpotifyWebHelper(opts) {
             return cb();
         }
 
-        launchSpotifyWebhelperIfNeeded(function (err, res) {
+        launchSpotifyWebhelper(function (err, res) {
           if (err) {
             return cb(err);
           }
