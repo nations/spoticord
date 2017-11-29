@@ -42,7 +42,7 @@ songEmitter.on('newSong', song => {
 		endTimestamp: song.end,
 		largeImageKey: largeImageKey,
     smallImageKey: smallImageKey,
-    largeImageText: `⛓ ${song.uri}`,
+    largeImageText: `⛓  ${song.uri}`,
     smallImageText: `💿  ${song.album}`,
 		instance: false,
   });
