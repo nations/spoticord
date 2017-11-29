@@ -22,14 +22,14 @@ async function checkSpotify() {
       return;
     }
 
-    if(!res.track.track_resource.uri) return;
+    if(!res.track.track_resource || !res.track.artist_resource) return;
     if(res.track.track_resource.uri == currentSong.uri) return;
 
     let start = parseInt(new Date().getTime().toString().substr(0, 10)),
         end = start + (res.track.length - res.playing_position);
     var song = {uri: res.track.track_resource.uri, name: res.track.track_resource.name, artist: res.track.artist_resource.name, start, end};
     currentSong = song;
-
+    console.log(res)
     songEmitter.emit('newSong', song);
   });
 }

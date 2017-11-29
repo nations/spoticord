@@ -6,7 +6,7 @@
 // This is a port foor node.js of this great article's code:
 // http://cgbystrom.com/articles/deconstructing-spotifys-builtin-http-server/
 
-var request = require('request'),
+const request = require('request'),
     qs = require('querystring'),
     util = require('util'),
     path = require('path'),
