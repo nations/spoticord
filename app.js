@@ -8,7 +8,7 @@ const keys = require('./keys.json');
 
 const rpc = new DiscordRPC.Client({ transport: keys.rpcTransportType }),
       s = new spotifyWeb.SpotifyWebHelper(),
-      appClient = keys.appClientID || "385061381344591872",
+      appClient = keys.appClientID,
       largeImageKey = keys.imageKeys.large,
       smallImageKey = keys.imageKeys.small;
 
@@ -27,7 +27,7 @@ async function checkSpotify() {
 
     let start = parseInt(new Date().getTime().toString().substr(0, 10)),
         end = start + (res.track.length - res.playing_position);
-    var song = {uri: res.track.track_resource.uri, name: res.track.track_resource.name, artist: res.track.artist_resource.name, start, end};
+    var song = {uri: res.track.track_resource.uri, name: res.track.track_resource.name, album: res.track.album_resource.name, artist: res.track.artist_resource.name, start, end};
     currentSong = song;
     console.log(res)
     songEmitter.emit('newSong', song);
@@ -36,12 +36,14 @@ async function checkSpotify() {
 
 songEmitter.on('newSong', song => {
   rpc.setActivity({
-    details: `🎵 Listening to: ${song.name}`,
-    state: `💿 by ${song.artist}`,
+    details: `🎵  ${song.name}`,
+    state: `👤  ${song.artist}`,
 	  startTimestamp: song.start,
 		endTimestamp: song.end,
 		largeImageKey: largeImageKey,
     smallImageKey: smallImageKey,
+    largeImageText: `⛓  ${song.uri}`,
+    smallImageText: `💿  ${song.album}`,
 		instance: false,
   });
 
