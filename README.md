@@ -10,7 +10,7 @@
 ## Setup
 
   - Clone the repo `git clone git@github.com:nations/spoticord.git`
-  - Install the modules `npm i`
+  - Install the modules `npm i` or `yarn`
   - Open Discord & Spotify
   - Start the RPC app `node app.js`
 
