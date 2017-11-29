@@ -1,6 +1,6 @@
 {
   "name": "spoticord",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Display your Spotify status as a Discord Rich Presence using the RPC API",
   "main": "app.js",
   "scripts": {
