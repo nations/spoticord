@@ -15,6 +15,10 @@
   - Open Discord & Spotify
   - Start the RPC app `node app.js`
 
+## Updating
+
+  - To update SpotiCord, enter the "spoticord" directory and run `git fetch` in your terminal.
+
 
 ## Useful links
 
