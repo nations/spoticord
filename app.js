@@ -6,6 +6,18 @@ const DiscordRPC = require('discord-rpc'),
 
 const keys = require('./keys.json');
 
+/**
+ * Check if user is blocking open.spotify.com before establishing RPC connection
+ * Works only on Linux based systems that use /etc/hosts, if not this not provided
+ * user will be in loop of ECONNRESET [changed address]:80 or recieve false data.
+ **/
+function checkHosts (file) {
+  if (file.includes("open.spotify.com")) throw new Error("Arr' yer be pirating, please remove \"open.spotify.com\" rule from your hosts file.");
+}
+if (process.platform !== "win32") {
+      if (fs.existsSync("/etc/hosts")) checkHosts(fs.readFileSync("/etc/hosts", "utf-8"));
+}
+
 const rpc = new DiscordRPC.Client({ transport: keys.rpcTransportType }),
       s = new spotifyWeb.SpotifyWebHelper(),
       appClient = keys.appClientID,
