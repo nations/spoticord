@@ -16,9 +16,27 @@
   - Start the RPC app `node app.js`
 
 ## Updating
-
   - To update SpotiCord, enter the "spoticord" directory and run `git fetch` in your terminal.
 
+## FAQ
+  - Q: Can I get banned or punished by Discord for using this?
+    A: No. The RPC was made by Discord themselves and Spoticord has been recommended by Discord staff
+
+  - Q: I don't see the progress bar, where's it gone?
+    A: Make sure you're using Discord Canary. Even still, Discord might remove this feature from time to time to update it since canary is a development version of Discord.
+
+  - Q: Can I host this on an external server?
+    A: No, the Discord RPC api runs on your local Discord client, and unless you want to port forward a few things and create necessary firewall rules to do it, it's not worth it. You'd have to repeat that with the Spotify web helper api, too.
+
+  - Q: I'm not experienced with this scope of programming, are there any tutorials?
+    A: Yes! I found a few on YouTube:
+      - https://www.youtube.com/watch?v=bTP2t6VgAv8
+      - https://www.youtube.com/watch?v=KhQtXUH4jlU
+      - https://www.youtube.com/watch?v=Rntn6Jg8cHk
+
+
+  - Q: I found an obscure error not mentioned in the troubleshooting section, what should I do?
+    A: First, check the closed (and open) issues on this repo, we might have answered it there already. If not, create a new one with the WHOLE error and when it occurred (during start, runtime, etc). Thank you!
 
 ## Useful links
 
