@@ -7,6 +7,7 @@
   - npm (>=5) or Yarn (>=1.2)
   - Discord Canary (preferred)
   - Spotify >= 1.0
+  - Git
 
 ## Setup
 
