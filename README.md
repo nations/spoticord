@@ -15,6 +15,13 @@
   - Install the modules `npm i` or `yarn`
   - Open Discord & Spotify
   - Start the RPC app `node app.js`
+  
+## How to run in the background
+
+  - Install pm2 `npm i pm2 -g`
+  - Start the app `pm2 start app.js --name="spoticord"`
+  - Use `pm2 log spoticord` to view the logs
+  - Restart the app using `pm2 restart spoticord`
 
 ## Updating
   - To update SpotiCord, enter the "spoticord" directory and run `git fetch` in your terminal.
@@ -59,9 +66,3 @@
   - Open ps.js
   - On line 11, replace the whole line with:
   `exec('wmic process list /format:csv', {maxBuffer: 2000*1024}, function (err, stdout, stderr) {`
-
-### How to run in the background
-  - Install pm2 `npm i pm2 -g`
-  - Start the app `pm2 start app.js --name="spoticord"`
-  - Use `pm2 log spoticord` to view the logs
-  - Restart the app using `pm2 restart spoticord`
