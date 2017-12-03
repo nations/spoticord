@@ -57,8 +57,8 @@ spotify.on('song', song => {
 	log(`Updated song to: ${song.artist.name} - ${song.title}`);
 	update(song, cfg.images.small);
 });
-spotify.on('pause', song => update(song, cfg.images.small));
-spotify.on('unpause', update);
+spotify.on('unpause', song => update(song, cfg.images.small));
+spotify.on('pause', update);
 spotify.on('stop', update);
 spotify.on('error', log.error);
 
