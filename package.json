@@ -21,5 +21,8 @@
     "fancy-log": "^1.3.0",
     "request": "^2.83.0",
     "wintools": "^0.1.0"
+  },
+  "devDependencies": {
+    "eslint-config-google": "^0.9.1"
   }
 }
