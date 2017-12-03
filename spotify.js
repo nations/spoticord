@@ -15,8 +15,8 @@ class Song {
 			name: data.track.artist_resource.name
 		};
 		this.album = {
-			id: data.track.album_resource.uri.slice('spotify:album:'.length),
-			name: data.track.album_resource.name
+			id: data.track.album_resource ? data.track.album_resource.uri.slice('spotify:album:'.length) : '',
+			name: data.track.album_resource ? data.track.album_resource.name : ''
 		};
 	}
 }
