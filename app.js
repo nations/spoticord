@@ -71,10 +71,10 @@ async function checkSpotify() {
         end = start + (res.track.length - res.playing_position);
     
     var song = {
-      uri: res.track.track_resource.uri,
+      uri: (res.track.track_resource.uri ? res.track.track_resource.uri : ""),
       name: res.track.track_resource.name,
-      album: res.track.album_resource.name,
-      artist: res.track.artist_resource.name,
+      album: (res.track.album_resource ? res.track.album_resource.name : ""),
+      artist: (res.track.artist_resource ? res.track.artist_resource.name : ""),
       playing: res.playing,
       position: res.playing_position,
       length: res.track.length,
