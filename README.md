@@ -29,9 +29,9 @@
   A: **No, the Discord RPC api runs on your local Discord client, and unless you want to port forward a few things and create necessary firewall rules to do it, it's not worth it. You'd have to repeat that with the Spotify web helper api, too.**
 
   Q: I'm not experienced with this scope of programming, are there any tutorials?  
-  A: **Yes! I found a few on YouTube:**
-        - https://www.youtube.com/watch?v=bTP2t6VgAv8
-        - https://www.youtube.com/watch?v=KhQtXUH4jlU
+  A: **Yes! I found a few on YouTube:**  
+        - https://www.youtube.com/watch?v=bTP2t6VgAv8  
+        - https://www.youtube.com/watch?v=KhQtXUH4jlU  
         - https://www.youtube.com/watch?v=Rntn6Jg8cHk
 
 
