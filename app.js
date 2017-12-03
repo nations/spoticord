@@ -7,7 +7,7 @@ const { Client } = require('discord-rpc'),
 
 /**
  * Check if user is blocking open.spotify.com before establishing RPC connection
- * Works only on Linux based systems that use /etc/hosts, if not this not provided
+ * Works only on Linux based systems that use /etc/hosts, if a rule exist, the
  * user will be in loop of ECONNRESET [changed address]:80 or recieve false data.
  **/
 function checkHosts(file) {
@@ -27,10 +27,32 @@ const rpc = new Client({ transport: keys.rpcTransportType }),
 var songEmitter = new events.EventEmitter(),
     currentSong = {};
 
-async function checkSpotify() {
+async function spotifyReconnect () {
   s.getStatus(function(err, res) {
+    if (!err) {
+      clearInterval(check);
+      global.intloop = setInterval(checkSpotify, 1500);
+    }
+  });
+}
+
+async function checkSpotify() {
+  s.getStatus(function (err, res) {
     if (err) {
-      log.error("Failed to fetch Spotify data:", err);
+      if (err.code === "ECONNREFUSED") {
+        if (err.address === "127.0.0.1" && err.port === 4381) {
+            /**
+             * Temporary workaround - to truly fix this, we need to change spotify.js to check for ports above 4381 to the maximum range.
+             * This is usually caused by closing Spotify and reopening before the port stops listening. Waiting about 10 seconds should be
+             * sufficient time to reopen the application.
+             **/
+            log.error("Spotify seems to be closed or unreachable on port 4381! Close Spotify and wait 10 seconds before restarting for this to work. Checking every 5 seconds to check if you've done so.");
+            clearInterval(intloop);
+            global.check = setInterval(spotifyReconnect, 5000);
+	      }
+      } else {
+          log.error("Failed to fetch Spotify data:", err);
+      }
       return;
     }
 
@@ -47,18 +69,19 @@ async function checkSpotify() {
 
     let start = parseInt(new Date().getTime().toString().substr(0, 10)),
         end = start + (res.track.length - res.playing_position);
-
+    
     var song = {
-      uri: res.track.track_resource.uri,
+      uri: (res.track.track_resource.uri ? res.track.track_resource.uri : ""),
       name: res.track.track_resource.name,
-      album: res.track.album_resource.name,
-      artist: res.track.artist_resource.name,
+      album: (res.track.album_resource ? res.track.album_resource.name : ""),
+      artist: (res.track.artist_resource ? res.track.artist_resource.name : ""),
       playing: res.playing,
       position: res.playing_position,
       length: res.track.length,
       start,
       end
     };
+    
     currentSong = song;
 
     songEmitter.emit('newSong', song);
@@ -110,11 +133,8 @@ songEmitter.on('songUpdate', song => {
 });
 
 rpc.on('ready', () => {
-  log(`Connected to Discord! (${appClient})`);
-
-  setInterval(() => {
-    checkSpotify();
-  }, 1500);
+    log(`Connected to Discord! (${appClient})`);
+    global.intloop = setInterval(checkSpotify, 1500);
 });
 
 rpc.login(appClient).catch(log.error);
