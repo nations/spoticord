@@ -11,8 +11,8 @@ class Song {
 		this.played = Math.floor(data.playing_position);
 		this.length = data.track.length;
 		this.artist = {
-			id: data.track.artist_resource.uri.slice('spotify:artist:'.length),
-			name: data.track.artist_resource.name
+			id: data.track.artist_resource ? data.track.artist_resource.uri.slice('spotify:artist:'.length) : '',
+			name: data.track.artist_resource ? data.track.artist_resource.name : ''
 		};
 		this.album = {
 			id: data.track.album_resource ? data.track.album_resource.uri.slice('spotify:album:'.length) : '',
@@ -44,7 +44,7 @@ class Spotify extends EventEmitter {
 	async check() {
 		try {
 			const { body } = await this._get('/remote/status.json', this._query);
-			if (!body.track || !body.track.track_resource) {
+			if (!body.track || !body.track.track_resource || body.track.track_type === 'ad') {
 				if (this._stopped === false) this.emit('stop');
 				return;
 			} else this._stopped = true;
