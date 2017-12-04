@@ -12,7 +12,7 @@ const spotify = new Spotify();
  * user will be in loop of ECONNRESET [changed address]:80 or recieve false data.
  **/
 try {
-	const path = process.platform === 'win32' ? resolve(process.env.SYSTEMDIRECTORY, 'System32', 'drivers', 'etc', 'hosts')  : '/etc/hosts';
+	const path = process.platform === 'win32' ? resolve(process.env.SYSTEMROOT, 'System32', 'drivers', 'etc', 'hosts')  : '/etc/hosts';
 	const file = fs.readFileSync(path);
 	if (file.includes('open.spotify.com')) {
 		log(`Arr' yer be pirating! Please remove your "open.spotify.com" rule from your hosts file located in ${path}`);
