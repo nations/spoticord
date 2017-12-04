@@ -53,9 +53,9 @@ function update(song, image = cfg.images.smallPaused) {
 	activity.smallImageKey = image;
 	if (song) {
 		activity.details = `🎵  ${song.title}`;
-		if (song.artist.name) activity.state = `👤  ${song.artist.name}`;
-		activity.largeImageText = `🔗  ${song.id}`;
-		if (song.album.id) activity.smallImageText = `💿  ${song.album.id}`;
+		activity.state = `👤  ${song.artist.name || 'Unknown'}`;
+		activity.largeImageText = `🔗  ${song.id || 'Unknown'}`;
+		activity.smallImageText = `💿  ${song.album.id || 'Unknown'}`;
 		activity.startTimestamp = Math.floor(Date.now() / 1000) - song.played;
 		activity.endTimestamp = activity.startTimestamp + song.length;
 	} else {
