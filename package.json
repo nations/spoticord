@@ -4,7 +4,8 @@
   "description": "Display your Spotify status as a Discord Rich Presence using the RPC API",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pkg app.js --targets latest-win-x64 --output Spoticord.exe"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,8 @@
     "discord-rpc": "^3.0.0-beta.4",
     "fancy-log": "^1.3.0",
     "request": "^2.83.0",
-    "wintools": "^0.1.0"
+    "wintools": "^0.1.0",
+    "pkg": "^4.3.0-beta.5"
   },
   "devDependencies": {
     "eslint-config-google": "^0.9.1"
