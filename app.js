@@ -7,7 +7,7 @@ const { Client } = require('discord-rpc'),
 
 /**
  * Check if user is blocking open.spotify.com before establishing RPC connection
- * Works only on Linux based systems that use /etc/hosts, if a rule exist, the
+ * Works only on Linux based systems that use /etc/hosts, if a rule exists, the
  * user will be in loop of ECONNRESET [changed address]:80 or recieve false data.
  **/
 function checkHosts(file) {
