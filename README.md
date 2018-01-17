@@ -11,27 +11,33 @@
 
 ## Setup
 
-  - Clone the repo `git clone https://github.com/nations/spoticord.git`
-  - Install the modules `npm i` or `yarn`
-  - Open Discord & Spotify
+  - Clone this repository: `$ git clone https://github.com/nations/spoticord.git`
+  - Move into the repository: `$ cd spoticord`
+  - Install the modules: `$ npm i` (requires [Node.JS](https://nodejs.org)) or `$ yarn` (requires [Yarn](https://yarnpkg.com/en/docs/install)).
+  - Open both Discord & Spotify
   - Start the RPC app `node app.js`
+  
+  You'll need to have Terminal/Command Prompt open to run this unless you follow these steps:
   
 ## How to run in the background
 
-  - Install pm2 `npm i pm2 -g`
-  - Start the app `pm2 start app.js --name="spoticord"`
-  - Use `pm2 log spoticord` to view the logs
-  - Restart the app using `pm2 restart spoticord`
+  - Install pm2 `$ npm i pm2 -g` (requires [Node.JS](https://nodejs.org))
+  - Start the app `$ pm2 start app.js --name="spoticord"`
+  - Use `$ pm2 log spoticord` to view the logs
+  - Restart the app using `$ pm2 restart spoticord`
 
 ## Updating
-  - To update SpotiCord, enter the "spoticord" directory and run `git fetch` in your terminal.
+  - To update SpotiCord, enter the "spoticord" directory and run `$ git fetch` in your terminal.
 
 ## FAQ
   Q: Can I get banned or punished by Discord for using this?  
-  A: **No. The RPC was made by Discord themselves and Spoticord has been recommended by Discord staff**
+  A: **No. The RPC was made by Discord themselves and Spoticord has been recommended and used by Discord staff**
 
   Q: I don't see the progress bar, where's it gone?  
-  A: **Make sure you're using Discord Canary. Even still, Discord might remove this feature from time to time to update it since canary is a development version of Discord.**
+  A: **Make sure you're using Discord Canary. Even still, Discord might remove this feature from time to time to update it since canary is a development version of Discord. Get Canary at:
+  https://discordapp.com/api/download/canary?platform=win
+  https://discordapp.com/api/download/canary?platform=osx
+  https://discordapp.com/api/download/canary?platform=linux**
 
   Q: Can I host this on an external server?  
   A: **No, the Discord RPC api runs on your local Discord client, and unless you want to port forward a few things and create necessary firewall rules to do it, it's not worth it. You'd have to repeat that with the Spotify web helper api, too.**
