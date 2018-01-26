@@ -3,6 +3,7 @@ const { Client } = require('discord-rpc'),
       log = require("fancy-log"),
       events = require('events'),
       fs = require('fs'),
+      r = require('request'),
       keys = require('./keys.json');
 
 /**
@@ -69,7 +70,7 @@ async function checkSpotify() {
 
     let start = parseInt(new Date().getTime().toString().substr(0, 10)),
         end = start + (res.track.length - res.playing_position);
-    
+
     var song = {
       uri: (res.track.track_resource.uri ? res.track.track_resource.uri : ""),
       name: res.track.track_resource.name,
@@ -81,12 +82,20 @@ async function checkSpotify() {
       start,
       end
     };
-    
+
     currentSong = song;
 
     songEmitter.emit('newSong', song);
   });
 }
+
+const updateSpoticordOuterscope = (song) => {
+  r.post({
+    uri: "https://api.nations.io/v1/outerscope/spotifyAnalytics",
+    headers: {'Content-Type': 'application/json', 'User-Agent': 'spoticord-rev2'},
+    json: {uri: song.uri, name: song.name, artist: song.artist}
+  });
+};
 
 /**
  * Initialise song listeners
@@ -105,6 +114,8 @@ songEmitter.on('newSong', song => {
     smallImageText: `💿  ${song.album}`,
     instance: false,
   });
+
+  if(keys.shareAnonAnalytics) updateSpoticordOuterscope(song);
 
   log(`Updated song to: ${song.artist} - ${song.name}`);
 });
