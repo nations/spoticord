@@ -1,3 +1,6 @@
+# **Depreciated**
+**In favor of [Discord's Spotify Connection](https://support.discordapp.com/hc/en-us/articles/360000167212).
+
 # spoticord `0.0.4` [![discordxd](https://discordapp.com/api/guilds/297142682894073856/embed.png)](https://discord.gg/nations)
 **Display your current Spotify song on Discord using the RPC API:**
 ![N|Solid](https://s.phineas.io/share/68747470733acx.png)
