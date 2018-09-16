@@ -148,4 +148,4 @@ rpc.on('ready', () => {
     global.intloop = setInterval(checkSpotify, 1500);
 });
 
-rpc.login(appClient).catch(log.error);
+rpc.login({ clientId: appClient }).catch(log.error);
