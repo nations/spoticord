@@ -57,6 +57,7 @@ async function checkSpotify() {
       return;
     }
 
+    if (!res || !res.track) return;
     if (!res.track.track_resource || !res.track.artist_resource) return;
 
     if (currentSong.uri && res.track.track_resource.uri == currentSong.uri && (res.playing != currentSong.playing)) {
