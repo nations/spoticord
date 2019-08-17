@@ -17,7 +17,7 @@
   - Clone the repo `git clone https://github.com/nations/spoticord.git`
   - Install the modules `npm i` or `yarn`
   - Open Discord & Spotify
-  - Start the RPC app `node app.js`
+  - Start the RPC app `node app.js` or `npm start`
   
 ## How to run in the background
 
