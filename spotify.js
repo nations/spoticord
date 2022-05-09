@@ -13,7 +13,7 @@ const request = require('request'),
     child_process = require('child_process');
 
 // global variables, used when running on windows
-var wintools, spotifyWebHelperWinProcRegex;
+var wintools, SpotifyWinProcRegex;
 
 const DEFAULT_PORT = 4381,
       DEFAULT_RETURN_ON = ['login', 'logout', 'play', 'pause', 'error', 'ap'],
@@ -79,7 +79,7 @@ async function getOauthToken(cb) {
     });
 }
 
-async function isSpotifyWebHelperRunning(cb) {
+async function isSpotifyRunning(cb) {
   cb = cb || function () { };
   // not doing anything for non windows, for now
   if (process.platform != 'win32')  {
@@ -92,34 +92,34 @@ async function isSpotifyWebHelperRunning(cb) {
       return cb(err);
     }
 
-    spotifyWebHelperWinProcRegex = spotifyWebHelperWinProcRegex || new RegExp('spotifywebhelper.exe', 'i');
+    SpotifyWinProcRegex = SpotifyWinProcRegex || new RegExp('Spotify.exe', 'i');
 
     for (var k in lst) {
-      if (spotifyWebHelperWinProcRegex.test(lst[k].desc)) {
+      if (SpotifyWinProcRegex.test(lst[k].desc)) {
         return cb(null, true);
       }
-      spotifyWebHelperWinProcRegex.lastIndex = 0;
+      SpotifyWinProcRegex.lastIndex = 0;
     };
     cb(null, false);
   });
 }
 
-function getWindowsSpotifyWebHelperPath() {
+function getWindowsSpotifyPath() {
   if (!process.env.USERPROFILE) {
     return null;
   }
 
-  return path.join(process.env.USERPROFILE, 'AppData\\Roaming\\Spotify\\Data\\SpotifyWebHelper.exe');
+  return path.join(process.env.USERPROFILE, 'AppData\\Roaming\\Spotify\\Spotify.exe');
 }
 
-function launchSpotifyWebhelper(cb) {
+function launchSpotify(cb) {
   cb = cb || function () { };
   // not doing anything for non windows, for now
   if (process.platform != 'win32') {
     return cb(null, true);
   }
 
-  isSpotifyWebHelperRunning(function (err, res) {
+  isSpotifyRunning(function (err, res) {
     if (err) {
       return cb(err);
     }
@@ -128,10 +128,10 @@ function launchSpotifyWebhelper(cb) {
       return cb(null, res);
     }
 
-    var exePath = getWindowsSpotifyWebHelperPath();
+    var exePath = getWindowsSpotifyPath();
 
     if (!exePath) {
-      return cb(new Error('Failed to retreive SpotifyWebHelper exe path'));
+      return cb(new Error('Failed to retreive Spotify exe path'));
     }
 
     var child = child_process.spawn(exePath, { detached: true, stdio: 'ignore' });
@@ -142,9 +142,9 @@ function launchSpotifyWebhelper(cb) {
 
 }
 
-function SpotifyWebHelper(opts) {
-    if (!(this instanceof SpotifyWebHelper)) {
-        return new SpotifyWebHelper(opts);
+function Spotify(opts) {
+    if (!(this instanceof Spotify)) {
+        return new Spotify(opts);
     }
 
     opts = opts || {};
@@ -181,13 +181,13 @@ function SpotifyWebHelper(opts) {
             return cb();
         }
 
-        launchSpotifyWebhelper(function (err, res) {
+        launchSpotify(function (err, res) {
           if (err) {
             return cb(err);
           }
 
           if (!res) {
-            return cb(new Error('SpotifyWebHelper not running, failed to start it'));
+            return cb(new Error('Spotify not running, failed to start it'));
           }
 
           getOauthToken(function (err, oauthToken) {
@@ -300,4 +300,4 @@ function SpotifyWebHelper(opts) {
     }
 }
 
-module.exports.SpotifyWebHelper = SpotifyWebHelper;
+module.exports.Spotify = Spotify;
