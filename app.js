@@ -1,5 +1,5 @@
 const { Client } = require('discord-rpc'),
-      spotifyWeb = require('./spotify'),
+      spotify = require('./spotify'),
       log = require("fancy-log"),
       events = require('events'),
       fs = require('fs'),
@@ -19,7 +19,7 @@ if (process.platform !== "win32" && fs.existsSync("/etc/hosts")) {
 }
 
 const rpc = new Client({ transport: keys.rpcTransportType }),
-      s = new spotifyWeb.SpotifyWebHelper(),
+      s = new spotify.Spotify(),
       appClient = keys.appClientID,
       largeImageKey = keys.imageKeys.large,
       smallImageKey = keys.imageKeys.small,
